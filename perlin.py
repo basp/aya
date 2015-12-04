@@ -1,3 +1,4 @@
+# http://scratchapixel.com/old/lessons/3d-advanced-lessons/noise-part-1/
 import numpy as np
 
 MAX_VERTICES = 256
@@ -37,3 +38,13 @@ def noise2d(x, y):
 	nx1 = lerp(c01, c11, sx)
 	
 	return lerp(nx0, nx1, sy)
+	
+def fbm(x, y, lacunarity = 2, gain = 0.5, octaves = 5):
+	n = 0
+	amp = 1
+	for i in range(octaves):
+		n += noise2d(x, y) * amp
+		x *= lacunarity
+		y *= lacunarity
+		amp *= gain
+	return n
